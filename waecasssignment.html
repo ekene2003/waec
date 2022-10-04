@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>junior waec assignment</title>
+        <style>
+            body {
+                padding: 6rem;
+                background-color: aliceblue;
+            }
+            form{
+                box-shadow: 4px  4px 11px black;
+                background:white;
+                width: 60%;
+                display: flex;
+                flex-direction: column;
+                 justify-content: center;
+                position: relative;
+                right: -20%;
+            }
+            div {
+                margin-bottom: 2rem;
+            }
+
+            input {
+                margin-right: .5rem;
+                width: 7rem;
+
+            }
+            #cumBtn{
+                display: block;
+               margin: 2rem auto;
+               border-radius: 30px;
+               width: 7rem;
+               height: 2rem;
+            }
+            @media screen and (max-width:768px) {
+                body{
+                padding: 2rem;
+                }
+            form#assignmentform { 
+                width: fit-content;
+                box-shadow: 4px  4px 11px black;
+                background:white;
+                /* width: 60%; */
+                display: flex;
+                flex-direction: column;
+                 justify-content: center;
+                 align-items: center;
+                position: relative;
+                right: 2%;
+            }
+               input {
+                margin-right: .5rem;
+                width: 7rem;
+
+            }
+            }
+        </style>
+    </head>
+
+    <body>
+        <form action="" id="assignmentform">
+            <div>
+                <label for="course-name">COURSE NAME:</label>
+                <input type="text" id="course-name" placeholder="enter subject">
+                <label for="course-score">COURSE SCORE:</label>
+                <input type="number" id="course-score" placeholder="enter your score" required>
+            <button type="submit" id="cumBtn">ADD</button>
+            </div>
+        <table border="1" id="assignment-table" cellspacing="0">
+            <thead>
+                <th>course name</th>
+                <th>course score</th>
+                <th>course cummulative</th>
+            </thead>
+        </table>
+        </form>
+
+        <script>
+            let form = document.querySelector("#assignmentform");
+            let courseScore = document.querySelector("#course-score");
+            let button = document.querySelector('#cumBtn');
+            let cumArray = [];
+            let tableTime;
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+            })
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                let courseName = document.querySelector("#course-name").value;
+                let realScore = courseScore.value;
+                let newValue = parseInt(realScore);
+                cumArray.push(newValue)
+                // console.log(cumArray);
+                let courseCummulative = cumArray.reduce((accumulator, Value) => 
+                    accumulator + Value, 0);
+                console.log(courseCummulative);
+                if (newValue < 100) {
+                    let table = document.querySelector('#assignment-table');
+                    let newRow = table.insertRow();
+                    let cell1 = newRow.insertCell(0);
+                    let cell2 = newRow.insertCell(1);
+                    let cell3 = newRow.insertCell(2)
+
+                    cell1.innerHTML = courseName;
+                    cell2.innerHTML = newValue;
+                    cell3.innerHTML = courseCummulative;
+                }
+                if (newValue > 100) {
+                    alert("ERROR!")
+                }
+
+            })
+        </script>
+    </body>
+
+</html>
